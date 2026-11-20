@@ -83,6 +83,7 @@ echo.
 exit /b
 
 :checkAudio
+if exist "%~1.png" exit /b
 if exist "%~1.jpg" exit /b
 if exist "%~1.jpeg" exit /b
 set "unmatchedAudio=%unmatchedAudio%  "%~1.%~2""
