@@ -1,7 +1,7 @@
 @echo off
 REM Run inside a folder that contains image and audio pairs with identical names.
 REM This creates stillimage music videos as mp4s.
-REM Images can have extension jpg or jpeg.
+REM Images can have extension png, jpg or jpeg.
 REM Audio can have extension mp3 or mpeg.
 REM Console stays open if need to warn mp4s already exist with a name,
 REM or any unpaired jpgs or mp3s.
@@ -13,6 +13,7 @@ set "skipped="
 set "unmatchedImages="
 set "unmatchedAudio="
 
+for %%F in (*.png) do if exist "%%F" call :processImage "%%~nF" "png"
 for %%F in (*.jpg) do if exist "%%F" call :processImage "%%~nF" "jpg"
 for %%F in (*.jpeg) do if exist "%%F" call :processImage "%%~nF" "jpeg"
 
@@ -30,7 +31,7 @@ echo.
 echo Usage instructions:
 echo   Run inside a folder that contains image and audio pairs with identical names.
 echo   This creates stillimage music videos as mp4s.
-echo   Images can have extension jpg or jpeg.
+echo   Images can have extension png, jpg or jpeg.
 echo   Audio can have extension mp3 or mpeg.
 
 if defined skipped (
@@ -56,7 +57,9 @@ pause
 exit /b
 
 :processImage
-rem If both image types exist, process the JPG only.
+rem If both image types exist, process the PNG only.
+if /i "%~2"=="jpg" if exist "%~1.png" exit /b
+if /i "%~2"=="jpeg" if exist "%~1.png" exit /b
 if /i "%~2"=="jpeg" if exist "%~1.jpg" exit /b
 
 if exist "%~1.mp3" (
