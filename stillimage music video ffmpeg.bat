@@ -5,6 +5,7 @@ REM Images can have extension jpg or jpeg.
 REM Audio can have extension mp3 or mpeg.
 REM Console stays open if need to warn mp4s already exist with a name,
 REM or any unpaired jpgs or mp3s.
+REM Requires FFMPEG installed and available in Windows PATH.
 
 setlocal EnableExtensions DisableDelayedExpansion
 
